@@ -895,19 +895,29 @@ function GetCharacterFaceImage( player )
 		case PILOT_SPECTRE_CORPORATE:
 			return "HUD/coop/coop_char_spectre"
 		
-		case ION_MODEL:
+		//case ION_MODEL:
+		case ION_MIL_MODEL:
+		case ION_IMC_MODEL:
 			return "../ui/menu/items/mod_icons/instant_shot"
 		
-		case LEGION_MODEL:
+		//case LEGION_MODEL:
+		case LEGION_MIL_MODEL:
+		case LEGION_IMC_MODEL:
 			return "../ui/menu/items/mod_icons/scatterfire"
 		
-		case SCORCH_MODEL:
+		//case SCORCH_MODEL:
+		case SCORCH_MIL_MODEL:
+		case SCORCH_IMC_MODEL:
 			return "../ui/menu/items/mod_icons/rapid_fire_missiles"
 		
-		case NORTHSTAR_MODEL:
+		//case NORTHSTAR_MODEL:
+		case NORTHSTAR_MIL_MODEL:
+		case NORTHSTAR_IMC_MODEL:
 			return "../ui/menu/items/mod_icons/starburst"
 
-		case RONIN_MODEL:
+		//case RONIN_MODEL:
+		case RONIN_MIL_MODEL:
+		case RONIN_IMC_MODEL:
 			return "../ui/menu/items/passive_icons/run_and_gun"
 
 		default:

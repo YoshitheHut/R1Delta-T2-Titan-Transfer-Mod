@@ -693,6 +693,14 @@ function SpawnNPCTitan( table )
 	npcTitan.SetTeam( team )
 	SetTitanAccuracyAndProficiency( npcTitan, Riff_AILethality() )
 
+	local should_apply_mdl_override = false
+
+	if ( team == TEAM_MILITIA )
+	{
+		if ( model != OGRE_MODEL && model != ATLAS_MODEL && model != STRYDER_MODEL )
+			should_apply_mdl_override = true
+	}
+
 	npcTitan.SetModel( model )
 	npcTitan.SetSkin( skin )
 
@@ -705,6 +713,30 @@ function SpawnNPCTitan( table )
 		//// hack hide() should be enough
 		//npcTitan.kv.rendermode = 3
 		//npcTitan.kv.renderamt = 0
+	}
+
+	if ( should_apply_mdl_override == true )
+	{
+		local mdl_to_replace
+		switch ( model )
+		{
+			case LEGION_IMC_MODEL:
+				mdl_to_replace = LEGION_MIL_MODEL
+				break
+			case SCORCH_IMC_MODEL:
+				mdl_to_replace = SCORCH_MIL_MODEL
+				break
+			case ION_IMC_MODEL:
+				mdl_to_replace = ION_MIL_MODEL
+				break
+			case NORTHSTAR_IMC_MODEL:
+				mdl_to_replace = NORTHSTAR_MIL_MODEL
+				break
+			case RONIN_IMC_MODEL:
+				mdl_to_replace = RONIN_MIL_MODEL
+				break
+		}
+		npcTitan.SetModel( mdl_to_replace )
 	}
 
 	npcTitan.SetOrigin( origin )

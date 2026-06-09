@@ -58,11 +58,11 @@
 		damageImpulseSpeedBoostLimit	930
 		damageImpulseSpeedLossLimit		930
 
-		model				"models/titans/medium/titan_medium_ajax.mdl"
-		bodymodel_imc		"models/titans/medium/titan_medium_ajax.mdl"
-		bodymodel_militia	"models/titans/medium/titan_medium_ajax.mdl"
-		armsmodel_imc		"models/weapons/arms/pov_titan_medium_ajax.mdl"
-		armsmodel_militia	"models/weapons/arms/pov_titan_medium_ajax.mdl"
+		model				"models/titans/medium/imc/titan_medium_ajax_i.mdl"
+		bodymodel_imc		"models/titans/medium/imc/titan_medium_ajax_i.mdl"
+		bodymodel_militia	"models/titans/medium/militia/titan_medium_ajax_m.mdl"
+		armsmodel_imc		"models/weapons/arms/imc/pov_titan_medium_ajax_i.mdl"
+		armsmodel_militia	"models/weapons/arms/militia/pov_titan_medium_ajax_m.mdl"
 		cockpitmodel		"models/weapons/arms/atlaspov_cockpit2.mdl"
 		weaponClass			"titan"
 		class				"titan"

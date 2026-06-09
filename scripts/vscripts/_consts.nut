@@ -275,12 +275,18 @@ const OGRE_MODEL = "models/titans/ogre/ogre_titan.mdl"
 const STRYDER_MODEL = "models/titans/stryder/stryder_titan.mdl"
 const DESTROYER_MODEL = "models/titans/ogre/ogre_titan.mdl"
 
-const LEGION_MODEL = "models/titans/heavy/titan_heavy_deadbolt.mdl"
-const SCORCH_MODEL = "models/titans/heavy/titan_heavy_ogre.mdl"
-const ION_MODEL = "models/titans/medium/titan_medium_ajax.mdl"
-//const TONE_MODEL = "models/titans/medium/titan_medium_wraith.mdl"
-const NORTHSTAR_MODEL = "models/titans/light/titan_light_raptor.mdl"
-const RONIN_MODEL = "models/titans/light/titan_light_locust.mdl"
+/*
+const LEGION_MIL_MODEL = "models/titans/heavy/militia/titan_heavy_deadbolt_m.mdl"
+const LEGION_IMC_MODEL = "models/titans/heavy/imc/titan_heavy_deadbolt_i.mdl"
+const SCORCH_MIL_MODEL = "models/titans/heavy/militia/titan_heavy_deadbolt_m.mdl"
+const SCORCH_IMC_MODEL = "models/titans/heavy/imc/titan_heavy_deadbolt_i.mdl"
+const ION_MIL_MODEL
+const ION_IMC_MODEL
+const NORTHSTAR_MIL_MODEL
+const NORTHSTAR_IMC_MODEL
+const RONIN_MIL_MODEL
+const RONIN_IMC_MODEL
+*/
 
 const IMC_SPECTRE_MODEL = "models/Robots/spectre/imc_spectre.mdl"
 const MILITIA_SPECTRE_MODEL = "models/Robots/spectre/mcor_spectre_assault.mdl"
@@ -2533,34 +2539,3 @@ const WEAPON_TWINB_NAME = "mp_weapon_mega2"
 const WEAPON_THUNDERBOLT_NAME = "mp_weapon_mega3"
 const WEAPON_CHARGE_CANNON_NAME = "mp_weapon_mega4"
 const ABILITY_HOVER_NAME = "mp_weapon_mega5"
-
-/*enum Cores
-{
-	CORE_DAMAGE = "core_damage",
-	CORE_DASH = "core_dash",
-	CORE_SHIELD = "core_defense"
-}*/
-/*
-enum CoreEntry
-{
-	Core1 = 1,
-	Core2 = 1,
-	Core3 = 2,
-	Core4 = 2,
-	Core5 = 2,
-	Core6 = 2,
-	Core7 = 2,
-	Core8 = 2,
-	Core9 = 2,
-	Core10 = 2,
-	Core11 = 2,
-	Core12 = 2,
-	Core13 = 3,
-	Core14 = 1,
-	Core15 = 1,
-	Core16 = 1,
-	Core17 = 1,
-	Core18 = 1,
-	Core19 = 1
-}
-*/

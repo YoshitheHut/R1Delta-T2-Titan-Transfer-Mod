@@ -20,6 +20,7 @@ enum eCockpitState
 
 function main()
 {
+
 	level._titanCrushables <- {}
 
 	level.rocketPodWeapons <- {}
@@ -42,12 +43,13 @@ function main()
 	level.hatchModels[ OGRE_MODEL ] <- OGRE_HATCH_PANEL
 	level.hatchModels[ DESTROYER_MODEL ] <- DESTROYER_HATCH_PANEL
 
-	level.hatchModels[ LEGION_MODEL ] <- STRYDER_HATCH_PANEL
-	level.hatchModels[ SCORCH_MODEL ] <- STRYDER_HATCH_PANEL
-	level.hatchModels[ ION_MODEL ] <- STRYDER_HATCH_PANEL
+	//level.hatchModels[ LEGION_MODEL ] <- STRYDER_HATCH_PANEL
+	//level.hatchModels[ SCORCH_MODEL ] <- STRYDER_HATCH_PANEL
+	//level.hatchModels[ ION_MODEL ] <- STRYDER_HATCH_PANEL
+	
 	//level.hatchModels[ TONE_MODEL ] <- STRYDER_HATCH_PANEL
-	level.hatchModels[ NORTHSTAR_MODEL ] <- STRYDER_HATCH_PANEL
-	level.hatchModels[ RONIN_MODEL ] <- STRYDER_HATCH_PANEL
+	//level.hatchModels[ NORTHSTAR_MODEL ] <- STRYDER_HATCH_PANEL
+	//level.hatchModels[ RONIN_MODEL ] <- STRYDER_HATCH_PANEL
 
 	level.rodeoHitBoxNumber <- {}
 	level.rodeoHitBoxNumber[ ATLAS_MODEL ] <- 34
@@ -55,12 +57,12 @@ function main()
 	level.rodeoHitBoxNumber[ OGRE_MODEL ] <- 41
 	level.rodeoHitBoxNumber[ DESTROYER_MODEL ] <- 30
 //what does this do
-	level.rodeoHitBoxNumber[ LEGION_MODEL ] <- 40
-	level.rodeoHitBoxNumber[ SCORCH_MODEL ] <- 39
-	level.rodeoHitBoxNumber[ ION_MODEL ] <- 35
+	//level.rodeoHitBoxNumber[ LEGION_MODEL ] <- 40
+	//level.rodeoHitBoxNumber[ SCORCH_MODEL ] <- 39
+	//level.rodeoHitBoxNumber[ ION_MODEL ] <- 35
 	//level.rodeoHitBoxNumber[ TONE_MODEL ] <- 36
-	level.rodeoHitBoxNumber[ NORTHSTAR_MODEL ] <- 51
-	level.rodeoHitBoxNumber[ RONIN_MODEL ] <- 52
+	//level.rodeoHitBoxNumber[ NORTHSTAR_MODEL ] <- 51
+	//level.rodeoHitBoxNumber[ RONIN_MODEL ] <- 52
 
 	Globalize( CodeCallback_PlayerInTitanCockpit )
 
@@ -121,6 +123,8 @@ function main()
 	file.chargeCannonAnims <- table
 
 	file.titanVOEjectNotifyDist <- 2000 * 2000
+
+	IncludeFile("R2Titan_MDL_Handler")
 
 	if ( IsServer() )
 	{

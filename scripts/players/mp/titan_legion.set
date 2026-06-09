@@ -59,11 +59,11 @@
 		damageImpulseSpeedBoostLimit	930
 		damageImpulseSpeedLossLimit		930
 
-		model				"models/titans/heavy/titan_heavy_deadbolt.mdl"//titan_heavy_scorch_prime
-		bodymodel_imc		"models/titans/heavy/titan_heavy_deadbolt.mdl"
-		bodymodel_militia	"models/titans/heavy/titan_heavy_deadbolt.mdl"
-		armsmodel_imc		"models/weapons/arms/pov_titan_heavy_deadbolt.mdl"
-		armsmodel_militia	"models/weapons/arms/pov_titan_heavy_deadbolt.mdl"//what texture does this need???
+		model				"models/titans/heavy/imc/titan_heavy_deadbolt_i.mdl"
+		bodymodel_imc		"models/titans/heavy/imc/titan_heavy_deadbolt_i.mdl"
+		bodymodel_militia	"models/titans/heavy/militia/titan_heavy_deadbolt_m.mdl"
+		armsmodel_imc		"models/weapons/arms/imc/pov_titan_heavy_deadbolt_i.mdl"
+		armsmodel_militia	"models/weapons/arms/militia/pov_titan_heavy_deadbolt_m.mdl"//what texture does this need???
 		cockpitmodel		"models/weapons/arms/ogrepov_cockpit.mdl"
 		weaponClass			"titan"
 		class				"titan"

@@ -59,10 +59,11 @@
 		damageImpulseSpeedBoostLimit	930
 		damageImpulseSpeedLossLimit		930
 
-		bodymodel_imc		"models/titans/light/titan_light_locust.mdl"
-		bodymodel_militia	"models/titans/light/titan_light_locust.mdl"
-		armsmodel_imc		"models/weapons/arms/pov_titan_light_locust.mdl"
-		armsmodel_militia	"models/weapons/arms/pov_titan_light_locust.mdl"
+		model				"models/titans/light/imc/titan_light_locust_i.mdl"
+		bodymodel_imc		"models/titans/light/imc/titan_light_locust_i.mdl"
+		bodymodel_militia	"models/titans/light/militia/titan_light_locust_m.mdl"
+		armsmodel_imc		"models/weapons/arms/imc/pov_titan_light_locust_i.mdl"
+		armsmodel_militia	"models/weapons/arms/militia/pov_titan_light_locust_m.mdl"
 		cockpitmodel		"models/weapons/arms/stryderpov_cockpit.mdl"
 		weaponClass			"titan"
 		class				"titan"
