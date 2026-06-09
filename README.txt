@@ -1,4 +1,4 @@
-READ THIS!!!!!
+EXPERIMENTAL: SUBJECT TO CRASH/FREEZE DUE TO GAME LIMITS
 
 I had to compress the VTF/VMT files, they are in their correct place just need uncompressing as Github has a file size limit.
 
