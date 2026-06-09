@@ -1,6 +1,6 @@
 EXPERIMENTAL: SUBJECT TO CRASH/FREEZE DUE TO GAME LIMITS
 
-I had to compress the VTF/VMT files, they are in their correct place just need uncompressing as Github has a file size limit.
+I had to compress the VTF/VMT files AND the MDL files, they are in their correct place just need uncompressing as Github has a file size limit.
 
 R1 may crash on initial start but have not noticed any further issues afterwards.
 
