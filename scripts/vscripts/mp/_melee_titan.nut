@@ -77,10 +77,13 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 		switch ( titanType )
 		{
 			case "atlas":
+			case "special_ogre":
 				func = MeleeThread_AtlasVsTitan
 				break
 
 			case "stryder":
+			case "special_atlas":
+			case "special_stryder":
 				func = MeleeThread_StryderVsTitan
 				break
 
@@ -90,7 +93,9 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 				break
 			
 			default:
-				local numA = math.rand()
+				func = MeleeThread_AtlasVsTitan
+				break
+				/*local numA = math.rand()
 				local numB = math.rand()
 				local numC = math.rand()
 
@@ -113,7 +118,7 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 				{
 					func = MeleeThread_AtlasVsTitan
 					break
-				}
+				}*/
 		}
 	}
 
