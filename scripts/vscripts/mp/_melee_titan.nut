@@ -67,6 +67,14 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 
 	// should rename TitanType
 	local titanType = GetSoulTitanType(attacker.GetTitanSoul())
+	//local numba = rand()
+	//printl( numba )
+
+	if ( titanType == "special_ogre" || titanType == "special_atlas" || titanType == "special_stryder" )
+	{
+		if ( TitanCoreInUse( attacker ) )
+			return
+	}
 
 	if ( target.IsNPC() )
 	{
@@ -77,13 +85,13 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 		switch ( titanType )
 		{
 			case "atlas":
-			case "special_ogre":
+			//case "special_ogre":
 				func = MeleeThread_AtlasVsTitan
 				break
 
 			case "stryder":
-			case "special_atlas":
-			case "special_stryder":
+			//case "special_atlas":
+			//case "special_stryder":
 				func = MeleeThread_StryderVsTitan
 				break
 
@@ -93,11 +101,11 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 				break
 			
 			default:
-				func = MeleeThread_AtlasVsTitan
-				break
-				/*local numA = math.rand()
-				local numB = math.rand()
-				local numC = math.rand()
+				//func = MeleeThread_AtlasVsTitan
+				//break
+				local numA = rand()
+				local numB = rand()
+				local numC = rand()
 
 				if( numA > numB > numC )
 				{
@@ -118,7 +126,7 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 				{
 					func = MeleeThread_AtlasVsTitan
 					break
-				}*/
+				}
 		}
 	}
 
