@@ -291,7 +291,7 @@ function EndSmartCore( soul )
 {
 	local titan = soul.GetTitan()
 	local player = self.GetWeaponOwner()
-	local weapon = player.GetMainWeapons()[0].GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 
 	if ( weapon != null )
 	{
@@ -305,7 +305,7 @@ function StartSmartCore( soul )//do i use minigun....do i use XO16? do i use... 
 	local titan = soul.GetTitan()
 	RegisterPreviousWeapons( titan )
 	local player = self.GetWeaponOwner()
-	local weapon = player.GetMainWeapons()[0].GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 	if ( weapon != null )
 	{
 		titan.TakeWeapon( weapon )
@@ -320,7 +320,7 @@ function EndBulletStormCore( soul )
 {
 	local titan = soul.GetTitan()
 	local player = self.GetWeaponOwner()
-	local weapon = player.GetMainWeapons()[0].GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 
 	if ( weapon != null )
 	{
@@ -334,7 +334,7 @@ function StartBulletStormCore( soul )//do i use minigun....do i use XO16? do i u
 	local titan = soul.GetTitan()
 	RegisterPreviousWeapons( titan )
 	local player = self.GetWeaponOwner()
-	local weapon = player.GetMainWeapons()[0].GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 	if ( weapon != null )
 	{
 		titan.TakeWeapon( weapon )
@@ -366,7 +366,7 @@ function EndAutoBurstCore( soul )
 {
 	local titan = soul.GetTitan()
 	local player = self.GetWeaponOwner()
-	local weapon = player.GetMainWeapons()[0].GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 
 	if ( weapon != null )
 	{
@@ -380,7 +380,7 @@ function StartAutoBurstCore( soul )//do i use minigun....do i use XO16? do i use
 	local titan = soul.GetTitan()
 	RegisterPreviousWeapons( titan )
 	local player = self.GetWeaponOwner()
-	local weapon = player.GetMainWeapons()[0].GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 	if ( weapon != null )
 	{
 		titan.TakeWeapon( weapon )
@@ -456,10 +456,10 @@ function HoverTitanWizardry( player, soul, vel_z )
 
 function RegisterPreviousWeapons( titan )
 {
-	primary_before_replace <- titan.GetMainWeapons()[0].GetWeaponClassName()
+	primary_before_replace <- titan.GetActiveWeapon().GetWeaponClassName()
 	ordnance_before_replace <- titan.GetOffhandWeapon( 0 ).GetWeaponClassName()
 	special_before_replace <- titan.GetOffhandWeapon( 1 ).GetWeaponClassName()
-	p_mods <- titan.GetMainWeapons()[0].GetMods()
+	p_mods <- titan.GetActiveWeapon().GetMods()
 	o_mods <- titan.GetOffhandWeapon( 0 ).GetMods() //mods
 	s_mods <- titan.GetOffhandWeapon( 1 ).GetMods() //mods
 }
