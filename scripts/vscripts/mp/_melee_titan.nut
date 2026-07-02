@@ -56,7 +56,7 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 		return
 	}
 
-	if ( attacker.IsPlayer() && TitanCoreInUse( attacker ) )
+	if ( attacker.IsPlayer() == true && TitanCoreInUse( attacker ) )
 	{
 		printl("Player Core in use: preventing game error.")
 		attacker.PlayerMelee_SetState( PLAYER_MELEE_STATE_NONE )
