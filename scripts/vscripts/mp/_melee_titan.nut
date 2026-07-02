@@ -56,6 +56,13 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 		return
 	}
 
+	if ( attacker.IsPlayer() && TitanCoreInUse( attacker ) )
+	{
+		printl("Player Core in use: preventing game error.")
+		attacker.PlayerMelee_SetState( PLAYER_MELEE_STATE_NONE )
+		return
+	}
+
 	local func
 
 	if ( !IsAlive( attacker ) )
@@ -67,11 +74,6 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 
 	// should rename TitanType
 	local titanType = GetSoulTitanType(attacker.GetTitanSoul())
-
-	if ( attacker.IsPlayer() && TitanCoreInUse( attacker ) )
-	{
-		return
-	}
 
 	if ( target.IsNPC() )
 	{
