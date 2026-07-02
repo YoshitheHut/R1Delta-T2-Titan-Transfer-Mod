@@ -68,6 +68,11 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 	// should rename TitanType
 	local titanType = GetSoulTitanType(attacker.GetTitanSoul())
 
+	if ( attacker.IsPlayer() && TitanCoreInUse( attacker ) )
+	{
+		return
+	}
+
 	if ( target.IsNPC() )
 	{
 		func = MeleeThread_AtlasVsTitanNPC
@@ -90,9 +95,9 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 				break
 			
 			default:
-				local numA = math.rand()
-				local numB = math.rand()
-				local numC = math.rand()
+				local numA = rand()
+				local numB = rand()
+				local numC = rand()
 
 				if( numA > numB > numC )
 				{
