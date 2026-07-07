@@ -98,29 +98,25 @@ function MeleeThread_TitanVsTitan_Internal( actions, action, attacker, target )
 				break
 			
 			default:
-				local numA = rand()
-				local numB = rand()
-				local numC = rand()
+				local execution_type = Random( [ "atlas", "ogre", "stryder" ] )
 
-				if( numA > numB > numC )
+				switch( execution_type )
 				{
-					func = MeleeThread_AtlasVsTitan
-					break
-				}
-				else if( numA < numB > numC )
-				{
-					func = MeleeThread_StryderVsTitan
-					break
-				}
-				else if( numA < numB < numC )
-				{
-					func = MeleeThread_OgreVsTitan
-					break
-				}
-				else
-				{
-					func = MeleeThread_AtlasVsTitan
-					break
+					case "atlas":
+						func = MeleeThread_AtlasVsTitan
+						break
+					
+					case "ogre":
+						func = MeleeThread_OgreVsTitan
+						break
+					
+					case "stryder":
+						func = MeleeThread_StryderVsTitan
+						break
+					
+					default:
+						func = MeleeThread_AtlasVsTitan
+						break
 				}
 		}
 	}

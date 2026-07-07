@@ -1,5 +1,7 @@
 READ THIS!!!!!
 
+Not compatible with Frontier Overhaul, but IS compatible with other TTT/T3 Mods made specifically for this mod.
+
 I had to compress the VTF/VMT files, they are in their correct place just need uncompressing as Github has a file size limit.
 
 R1 may crash on initial start but have not noticed any further issues afterwards.
