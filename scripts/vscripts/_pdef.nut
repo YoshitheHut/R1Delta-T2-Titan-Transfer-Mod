@@ -320,7 +320,7 @@ function InitPersistence()
 	    pas_build_up_nuclear_core = 10
 		pas_burst_boosters = 11
 		pas_flight_core = 12
-		pas_pilot_link = 13
+		//pas_pilot_link = 13
 		//pas_dual_tactical = 14
     }//watch my new passives bite me in the ass later, my game seems to crash every so often already cause of the amount of stuff i added.
 

@@ -191,26 +191,6 @@ function GiveTitanWeaponsForPlayer( player, titan, existingTitan = false )
 			offhand_weaponry[1].weapon = "mp_weapon_mega5" //afterall, thats the downside of BMT
 		}
 
-		if( table.passive2 == 18 )
-		{
-			local pilot_tac = player.playerClassData["pilot"].offhandWeapons[1].weapon
-			switch( pilot_tac )
-			{
-				case "mp_ability_cloak":
-				case "mp_ability_sonar":
-					offhand_weaponry[1].weapon = pilot_tac
-					break
-				
-				case "mp_ability_heal":
-					offhand_weaponry[1].weapon = "mp_ability_sonar"
-					break
-					
-				default:
-					offhand_weaponry[1].weapon = "mp_ability_sonar"
-					break
-			}
-		}
-
         if ( "weapon" in offhand_weaponry[0] )
         {
 			if ( !TryAssignOffhand( player, titan, offhand_weaponry, 0, "offhands_titans_offensive" ) )
@@ -315,26 +295,6 @@ function GiveHotDropTitanWeaponsForPlayer( player, titan )
 		offhand_weaponry[1].weapon = "mp_weapon_mega5" //afterall, thats the downside of BMT
 	}
 
-	if( table.passive2 == 18 )
-	{
-		local pilot_tac = player.playerClassData["pilot"].offhandWeapons[1].weapon
-		switch( pilot_tac )
-		{
-			case "mp_ability_cloak":
-			case "mp_ability_sonar":
-				offhand_weaponry[1].weapon = pilot_tac
-				break
-			
-			case "mp_ability_heal":
-				offhand_weaponry[1].weapon = "mp_ability_sonar"
-				break
-
-			default:
-				offhand_weaponry[1].weapon = "mp_ability_sonar"
-				break
-		}
-	}
-
 	titan.GiveOffhandWeapon( offhand_weaponry[0].weapon, 0, [] )
 	titan.GiveOffhandWeapon( offhand_weaponry[1].weapon, 1, [] )
 
@@ -395,26 +355,6 @@ function GiveTitanWeaponsForLoadoutData( titan, table )
 	if ( titan.GetModelName() == "models/titans/light/titan_light_raptor.mdl" )//ok yes i know that a model search is bad... but i see no options here
 	{
 		offhand_weaponry[1].weapon = "mp_weapon_mega5" //afterall, thats the downside of BMT
-	}
-
-	if( table.passive2 == 18 )
-	{
-		local pilot_tac = player.playerClassData["pilot"].offhandWeapons[1].weapon
-		switch( pilot_tac )
-		{
-			case "mp_ability_cloak":
-			case "mp_ability_sonar":
-				offhand_weaponry[1].weapon = pilot_tac
-				break
-			
-			case "mp_ability_heal":
-				offhand_weaponry[1].weapon = "mp_ability_sonar"
-				break
-				
-			default:
-				offhand_weaponry[1].weapon = "mp_ability_sonar"
-				break
-		}
 	}
 
 	titan.GiveOffhandWeapon( offhand_weaponry[0].weapon, 0, [] )

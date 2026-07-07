@@ -5,7 +5,7 @@
 ::PAS_MINIMAP_AI				<- 0x00010
 
 ::PAS_BURST_BOOSTERS			<- 0x00011 //i bet this is behind the occasional crash
-::PAS_PILOT_LINK			<- 0x00012 //becomes passive "18"
+//::PAS_PILOT_LINK			<- 0x00012 //becomes passive "18"
 //::PAS_DUAL_TACTICAL				<- 0x00014
 
 ::PAS_ENHANCED_TITAN_AI			<- 0x00020
@@ -73,7 +73,7 @@ level.passiveBitfieldFromEnum[ "pas_hyper_core" ]				<- PAS_HYPER_CORE
 level.passiveBitfieldFromEnum[ "pas_marathon_core" ]			<- PAS_MARATHON_CORE
 level.passiveBitfieldFromEnum[ "pas_build_up_nuclear_core" ]	<- PAS_BUILD_UP_NUCLEAR_CORE
 level.passiveBitfieldFromEnum[ "pas_burst_boosters" ]			<- PAS_BURST_BOOSTERS
-level.passiveBitfieldFromEnum[ "pas_pilot_link" ]			<- PAS_PILOT_LINK
+//level.passiveBitfieldFromEnum[ "pas_pilot_link" ]			<- PAS_PILOT_LINK
 //level.passiveBitfieldFromEnum[ "pas_dual_tactical" ]			<- PAS_DUAL_TACTICAL
 //level.passiveBitfieldFromEnum[ "pas_flight_core" ]				<- PAS_FLIGHT_CORE
 
@@ -98,7 +98,7 @@ function main()
 	level.titanPassives[ PAS_MARATHON_CORE ] <- true
 	level.titanPassives[ PAS_BUILD_UP_NUCLEAR_CORE ] <- true
 	level.titanPassives[ PAS_BURST_BOOSTERS ] <- true
-	level.titanPassives[ PAS_PILOT_LINK ] <- true
+	//level.titanPassives[ PAS_PILOT_LINK ] <- true
 	//level.titanPassives[ PAS_DUAL_TACTICAL ] <- true
 	//level.titanPassives[ PAS_FLIGHT_CORE ] <- true
 
