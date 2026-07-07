@@ -270,6 +270,7 @@ function EndMissileCore( soul )
 		titan.TakeOffhandWeapon( 1 )
 
 	thread ReplaceTitanWeapon( titan, ordnance_before_replace, o_mods, "ordnance" )
+	thread ReplaceTitanWeapon( titan, special_before_replace, s_mods, "special" )
 }
 
 function StartMissileCore( soul )
