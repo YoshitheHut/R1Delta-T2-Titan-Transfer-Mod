@@ -507,7 +507,6 @@ function CreateSpawnNPCTitanTemplate( team, settings )
 	table.weaponMod <- null
 	table.title		<- null
 	table.decal 	<- null
-	table.core		<- null
 
 	
 
@@ -664,7 +663,6 @@ function SpawnNPCTitan( table )
 	local skin       = table.skin
 	local weapon 	 = table.weapon
 	local decal      = table.decal
-	local core		 = table.core
 
 	if ( !settings )
 		settings = "titan_atlas"

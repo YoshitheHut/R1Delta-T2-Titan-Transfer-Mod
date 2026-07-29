@@ -4,6 +4,7 @@
 const DEV_ENABLED = 1
 const DEV_DISABLED = 0
 
+/*
 const DMG_COR_IMG = "../ui/menu/items/ability_images/chassis_page_core_atlas"
 const DAS_COR_IMG = "../ui/menu/items/ability_images/chassis_page_core_stryder"
 const SHI_COR_IMG = "../ui/menu/items/ability_images/chassis_page_core_ogre"
@@ -21,6 +22,7 @@ const STRYDER_IMG_IMC = "../ui/menu/loadouts/titan_chassis_stryder_imc"
 const STRYDER_IMG_MCO = "../ui/menu/loadouts/titan_chassis_stryder_mcor"
 const OGRE_IMG_IMC = "../ui/menu/loadouts/titan_chassis_ogre_imc"
 const OGRE_IMG_MCO = "../ui/menu/loadouts/titan_chassis_ogre_mcor"
+*/
 
 ::unlockLevels <- {}
 
@@ -118,7 +120,9 @@ function main()
 	Globalize( GetDefaultAttachmentName )
 	Globalize( GetDefaultAttachmentIcon )
 
-	Globalize( CreateSetFileData )
+	Globalize(  CreateR1DeltaItems )
+
+	Globalize( CreateBlackMarketModdedItems )
 	Globalize( BlackMarket_ITEMCALL )
 
 	if ( developer() > 0 )
@@ -323,7 +327,8 @@ function InitItems()
 	if ( IsClient() )
 		ClearItemTypes();
 	
-	IncludeScript( "Yoshi's_TitanCreator" )
+	//IncludeFile( "Yoshi's_All-Stars" )
+	//IncludeScript( "Yoshi's_TitanCreator" )
 
 	////////////////////
 	//PILOT WEAPON DATA
@@ -471,10 +476,6 @@ function InitItems()
 	CreateGenderData( itemType.RACE, 				DEV_ENABLED,	0,		null, 	null, "race_human_male" )
 	CreateGenderData( itemType.RACE,				DEV_ENABLED,	0, 		null, 	null, "race_human_female" )
 
-	CreateTitanCoreData( itemType.TITAN_CORE, 	DEV_ENABLED,	0, 	null, 	null, "core_defense", 		"Shield Core",	"Refills and overcharges titan shields.",		"Ogre Shield Core stolen directly from a Hammond Robotics factory, when active it refills and overcharges titan shield systems.",		"../ui/menu/items/ability_images/chassis_page_core_ogre",			"../ui/menu/items/ability_images/chassis_page_core_ogre" )
-	CreateTitanCoreData( itemType.TITAN_CORE, 	DEV_ENABLED,	0, 	null, 	null, "core_damage", 		"Damage Core",	"Increases damage for a limited time.",		"Atlas Damage Core purchased directly from the black market, when activated it will boost damage from all weapons for a short time.",		"../ui/menu/items/ability_images/chassis_page_core_atlas",			"../ui/menu/items/ability_images/chassis_page_core_atlas" )
-	CreateTitanCoreData( itemType.TITAN_CORE, 	DEV_ENABLED,	0, 	null, 	null, "core_dash", 		"Dash Core",	"Drastic boost system recharge rate.",		"Stryder Dash Core salvaged and assembled from several fallen Stryder class titans, when active it drastically increases titan boost recharge rate.",		"../ui/menu/items/ability_images/chassis_page_core_stryder",			"../ui/menu/items/ability_images/chassis_page_core_stryder" )
-
 	////////////////////
 	//TITAN WEAPON DATA
 	////////////////////
@@ -539,7 +540,7 @@ function InitItems()
 	CreatePassiveData( itemType.TITAN_PASSIVE2, 	DEV_ENABLED,	0, 	null, 	null, "pas_doomed_time", 			"#GEAR_SURVIVOR",			"#GEAR_SURVIVOR_DESC",				"#GEAR_SURVIVOR_LONGDESC",				"../ui/menu/items/passive_icons/doomed_time",				"../ui/menu/items/passive_icons/doomed_time" )
 	
 	//Modded
-	CreatePassiveData( itemType.TITAN_PASSIVE1, 	DEV_ENABLED,	0, 	null, 	null, "pas_burst_boosters", 	"Burst Boosters",		"Drastic boost speed increase at the cost of boost recharge times.",			"Significantly increases titan boost speed at the cost of a longer boost recharge time.",			"../ui/menu/items/passive_icons/turbo_drop",		"../ui/menu/items/passive_icons/turbo_drop" )
+	//CreatePassiveData( itemType.TITAN_PASSIVE1, 	DEV_ENABLED,	0, 	null, 	null, "pas_burst_boosters", 	"Burst Boosters",		"Drastic boost speed increase at the cost of boost recharge times.",			"Significantly increases titan boost speed at the cost of a longer boost recharge time.",			"../ui/menu/items/passive_icons/turbo_drop",		"../ui/menu/items/passive_icons/turbo_drop" )
 	//CreatePassiveData( itemType.TITAN_PASSIVE2, 	DEV_ENABLED,	0, 	null, 	null, "pas_pilot_link", 		"Tactical Link",	"Replaces titan tactical system with a pilot ability.",		"Replaces titan tactical systems with your pilot's ability if valid, otherwise a random pilot ability will be selected \nValid abilities include Sonar and Cloak.",		"../ui/menu/items/passive_icons/power_cell",			"../ui/menu/items/passive_icons/power_cell" )
 	//CreatePassiveData( itemType.TITAN_PASSIVE2, 	DEV_ENABLED,	0, 	null, 	null, "pas_dual_tactical", 		"Defensive Platform",	"Replace titan ordnance with an extra tactical.",		"Replaces titan ordnance systems with an extra tactical based on tactical/ordnance already selected.",		"../ui/menu/items/ability_icons/bubble_shield",			"../ui/menu/items/ability_icons/bubble_shield" )
 	//CreatePassiveData( itemType.TITAN_PASSIVE2, 	DEV_ENABLED,	0, 	null, 	null, "pas_armored_up", 	"Heavier Armor",		"Increases titan health but with a small impact to the boost system.",			"Increases titan health but reduces boost charge efficiency at heavier classes or reduces a dash at lighter classes.",			"../ui/menu/items/ability_icons/bubble_shield",		"../ui/menu/items/ability_icons/bubble_shield" )
@@ -614,7 +615,7 @@ function InitItems()
 	//CreateSetFileData( itemType.TITAN_SETFILE,		DEV_ENABLED,	0, 	null, 	null, "titan_ion",			"Black Market Atlas",		"Modified Atlas unit with customizable core.",	"../ui/menu/loadouts/titan_chassis_atlas_imc",		"../ui/menu/loadouts/titan_chassis_atlas_mcor", 	"#CHASSIS_ATLAS_CORE_NAME", 	"#CHASSIS_ATLAS_CORE_DESCRIPTION", 		"../ui/menu/items/ability_images/chassis_page_core_atlas",  		85, 90, 76, 2 )
 	//Moved this ^
 
-	setUp( 0 )
+	//setUp( 0 )
 
 	/////////////////////
 	// TITAN DECAL DATA
@@ -760,7 +761,7 @@ function InitItems()
 	itemsOfType[itemType.TITAN_SPECIAL].sort( SortByUnlockReq )
 	itemsOfType[itemType.TITAN_PASSIVE1].sort( SortByUnlockReq )
 	itemsOfType[itemType.TITAN_PASSIVE2].sort( SortByUnlockReq )
-	itemsOfType[itemType.TITAN_CORE].sort( SortByUnlockReq )
+
 
 	if ( !IsUI() )
 	{
@@ -866,7 +867,43 @@ function CreateR1DeltaItems()
 
 	//CreateWeaponData( itemType.TITAN_ORDNANCE,		DEV_DISABLED,	0,		null, 	null, "mp_titanweapon_salvo_rockets_core_right", 		"../ui/menu/items/titanweapon_salvo_rockets",			"../ui/menu/items/ability_icons/salvo_rockets",		"../ui/menu/items/titanweapon_salvo_rockets", HideFromMenus )
 	CreateModData( itemType.TITAN_PRIMARY_MOD,		DEV_ENABLED,	0, 	null, 				1, 		"mp_titanweapon_shotgun",				"full_burst",				"Full-Burst",					"Allows firing every bullet in the magazine at a single trigger pull.",			"Allows firing every bullet in the magazine at a single trigger pull.",			-20, -5, 0, 10, 9, 		"../ui/menu/items/mod_icons/burst", 				"../ui/menu/items/mod_icons/burst" )
-	CreateWeaponData( itemType.TITAN_SPECIAL, 		DEV_ENABLED,	25,		null, 	null, "mp_weapon_mega5", 				"../ui/menu/items/mod_icons/afterburners",				"../ui/menu/items/mod_icons/afterburners", "../ui/menu/items/mod_icons/afterburners", HideFromMenus )
+	CreateWeaponData( itemType.TITAN_SPECIAL, 		DEV_ENABLED,	25,		null, 	null, "mp_weapon_mega5", 				"../ui/menu/items/mod_icons/afterburners",				"../ui/menu/items/mod_icons/afterburners", "../ui/menu/items/mod_icons/afterburners" )
+	CheckBlackMarketModdedTitans()
+}
+	//BlackmarketCreation
+
+function CheckBlackMarketModdedTitans()
+{
+	local loop_max = MasterModdedTitans.len()
+	for( local E = 0; E < loop_max; E++ )
+	{
+		if( loop_max > 0 )
+		{
+			local t_a = MasterModdedTitans[ E ]
+			
+			BlackMarket_ITEMCALL( t_a.setfile, t_a.unlock_level, t_a.print_name, t_a.print_desc, t_a.titan_img_imc, t_a.titan_img_mcor, t_a.core_name, t_a.core_desc, t_a.core_img, t_a.stat_speed, t_a.stat_accel, t_a.stat_health, t_a.stat_boost_count )
+		}
+	}
+}
+
+function CreateBlackMarketModdedItems( modded_titan_place )
+{
+	/*
+	local loop_max = MasterModdedTitans.len()
+	for( local E = 0; E < loop_max; E++ )
+	{
+		if( loop_max > 0 )
+		{
+			local t_a = MasterModdedTitans[ E ]
+			
+			BlackMarket_ITEMCALL( t_a.setfile, t_a.unlock_level, t_a.print_name, t_a.print_desc, t_a.titan_img_imc, t_a.titan_img_mcor, t_a.core_name, t_a.core_desc, t_a.core_img, t_a.stat_speed, t_a.stat_accel, t_a.stat_health, t_a.stat_boost_count )
+		}
+	}
+	*/
+	local t_a = MasterModdedTitans[ modded_titan_place ]
+	printl( "ADDING NEW MODDED TITAN" )
+	BlackMarket_ITEMCALL( t_a.setfile, t_a.unlock_level, t_a.print_name, t_a.print_desc, t_a.titan_img_imc, t_a.titan_img_mcor, t_a.core_name, t_a.core_desc, t_a.core_img, t_a.stat_speed, t_a.stat_accel, t_a.stat_health, t_a.stat_boost_count )
+
 }
 
 function BlackMarket_ITEMCALL( name, unlock_level, game_name, game_desc, titan_img_imc, titan_img_mcor, core_name, core_desc, core_img, statSpeed, statAccel, statHealth, statDash )
@@ -1241,7 +1278,7 @@ function GetAllItemsOfType( type, parentRef = null )
 			type == itemType.EVENT_PASSIVE ||
 			type == itemType.TITAN_DECAL   ||
 			type == itemType.TITAN_OS	||
-			type == itemType.TITAN_CORE
+
 		)
 
 	local items = []
@@ -1390,40 +1427,6 @@ function CreateGenderData( type, dev_enabled, levelReq, challengeReq, challengeT
 	itemData[ref] <- {}
 	itemData[ref].type <- type
 	itemData[ref].ref <- ref
-	itemData[ref].dev_enabled <- dev_enabled
-	itemData[ref].challengeReq <- challengeReq
-	itemData[ref].challengeTier <- challengeTier
-
-	if ( !( type in itemsOfType ) )
-		itemsOfType[type] <- []
-	itemsOfType[type].append( ref )
-
-	allItems.append( { ref = ref, childRef = null, type = type } )
-
-	UpdateChallengeRewardItems( ref, null, type, challengeReq, challengeTier )
-}
-
-function CreateTitanCoreData( type, dev_enabled, levelReq, challengeReq, challengeTier, ref, name, desc, longdesc, image, icon = null )//For use with BlackMarket class Titans
-{
-	ref = ref.tolower()
-	Assert( !( ref in itemData ), "ref " + ref + " being redefined!" )
-
-	if ( IsClient() )
-	{
-		PrecacheHUDMaterial( image )
-
-		if ( icon != null )
-			PrecacheHUDMaterial( icon )
-	}
-
-	itemData[ref] <- {}
-	itemData[ref].type <- type
-	itemData[ref].ref <- ref
-	itemData[ref].name <- name
-	itemData[ref].desc <- desc
-	itemData[ref].longdesc <- longdesc
-	itemData[ref].image <- image
-	itemData[ref].icon <- icon
 	itemData[ref].dev_enabled <- dev_enabled
 	itemData[ref].challengeReq <- challengeReq
 	itemData[ref].challengeTier <- challengeTier
@@ -1627,6 +1630,8 @@ function CreateSetFileData( type, dev_enabled, levelReq, challengeReq, challenge
 			PrecacheHUDMaterial( coreImage )
 	}
 
+	printl(ref)
+
 	itemData[ref] <- {}
 	itemData[ref].type <- type
 	itemData[ref].ref <- ref
@@ -1806,7 +1811,6 @@ function IsItemLocked( ref, childRef = null, player = null )
 					case itemType.TITAN_SETFILE:
 					case itemType.TITAN_PASSIVE1:
 					case itemType.TITAN_PASSIVE2:
-					case itemType.TITAN_CORE:
 						if ( IsItemLocked( "edit_titans", null, player ) )
 							return true
 						break
@@ -2140,9 +2144,6 @@ function GetDisplayNameFromItemType( type )
 		case itemType.TITAN_SETFILE:
 			return "#CHASSIS"
 
-		case itemType.TITAN_CORE:
-			return "#CHASSIS"
-
 		default:
 			Assert( "Invalid item type!" )
 	}
@@ -2247,9 +2248,6 @@ function GetItemTypeFromPropertyName( property, isTitanProperty )
 			itemTypeName = itemType.TITAN_DECAL
 			break
 		
-		case "core":
-			itemTypeName = itemType.TITAN_CORE
-			break
 	}
 
 	return itemTypeName
