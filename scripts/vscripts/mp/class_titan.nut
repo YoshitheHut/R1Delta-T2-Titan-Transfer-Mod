@@ -85,8 +85,8 @@ function GiveNPCTitanTacticalAbility( titan )
 
 		switch ( weaponName )
 		{
-		//case "mp_weapon_mega5":// dunno how itll affect the game but may aswell try
 		case "mp_titanweapon_vortex_shield":
+		case "mp_weapon_mega5":// dunno how itll affect the game but may aswell try
 			abilityType = TTA_VORTEX
 			break
 
@@ -177,25 +177,18 @@ function GiveTitanWeaponsForPlayer( player, titan, existingTitan = false )
 
 		//printl( table.passive2 )
 
-		local loop_max = MasterModdedTitans.len()
-		for( local E = 0; E < loop_max; E++ )
+		if ( titan.GetModelName() == "models/titans/heavy/titan_heavy_ogre.mdl" )//why was it called 18 by the table though?
 		{
-			if( loop_max > 0 )
-			{
-				local t_a = MasterModdedTitans[ E ]
+			offhand_weaponry[1].weapon = TryDualOffhandWeaponry( offhands[1].weapon, offhands[0].weapon, true )
+		}
+		if ( titan.GetModelName() == "models/titans/medium/titan_medium_ajax.mdl" )
+		{
+			offhand_weaponry[0].weapon = TryDualOffhandWeaponry( offhands[1].weapon, offhands[0].weapon, false )
+		}
 
-				if( t_a.setfile == GetSoulPlayerSettings( soul ) )
-				{
-					if( t_a.offhand_override != null )
-					{
-						if( t_a.offhand_override.replaces_tactical == true )
-							offhand_weaponry[1].weapon = TryReplacementOverride( offhand_weaponry[1].weapon, offhand_weaponry[0].weapon, t_a.offhand_override )
-						else
-							offhand_weaponry[0].weapon = TryReplacementOverride( offhand_weaponry[1].weapon, offhand_weaponry[0].weapon, t_a.offhand_override )
-				
-					}
-				}
-			}
+		if ( titan.GetModelName() == "models/titans/light/titan_light_raptor.mdl" )//ok yes i know that a model search is bad... but i see no options here
+		{
+			offhand_weaponry[1].weapon = "mp_weapon_mega5" //afterall, thats the downside of BMT
 		}
 
         if ( "weapon" in offhand_weaponry[0] )
@@ -242,7 +235,7 @@ function GiveTitanWeaponsForPlayer( player, titan, existingTitan = false )
 		CreateTitanRocketPods( soul, titan )
 	}
 
-	if ( ordn == "mp_weapon_mega4" || spec == "mp_weapon_mega4" )
+	if ( ordn == "mp_weapon_mega4" || spec == "mp_weapon_mega4" || titan.GetModelName() == "models/titans/medium/titan_medium_ajax.mdl" )
 		CreateChargeCannon( soul, titan )
 
 	if (!existingTitan)
@@ -288,25 +281,18 @@ function GiveHotDropTitanWeaponsForPlayer( player, titan )
 
 	local offhand_weaponry = [ ord_stuff, tac_stuff ]
 
-	local loop_max = MasterModdedTitans.len()
-	for( local E = 0; E < loop_max; E++ )
+	if ( titan.GetModelName() == "models/titans/heavy/titan_heavy_ogre.mdl" )//table.passive2 == 18
 	{
-		if( loop_max > 0 )
-		{
-			local t_a = MasterModdedTitans[ E ]
-
-			if( t_a.setfile == GetSoulPlayerSettings( soul ) )
-			{
-				if( t_a.offhand_override != null )
-				{
-					if( t_a.offhand_override.replaces_tactical == true )
-						offhand_weaponry[1].weapon = TryReplacementOverride( offhand_weaponry[1].weapon, offhand_weaponry[0].weapon, t_a.offhand_override )
-					else
-						offhand_weaponry[0].weapon = TryReplacementOverride( offhand_weaponry[1].weapon, offhand_weaponry[0].weapon, t_a.offhand_override )
-			
-				}
-			}
-		}
+		offhand_weaponry[1].weapon = TryDualOffhandWeaponry( offhands[1].weapon, offhands[0].weapon, true )
+	}
+	if ( titan.GetModelName() == "models/titans/medium/titan_medium_ajax.mdl" )
+	{
+		offhand_weaponry[0].weapon = TryDualOffhandWeaponry( offhands[1].weapon, offhands[0].weapon, false )
+	}
+	
+	if ( titan.GetModelName() == "models/titans/light/titan_light_raptor.mdl" )//ok yes i know that a model search is bad... but i see no options here
+	{
+		offhand_weaponry[1].weapon = "mp_weapon_mega5" //afterall, thats the downside of BMT
 	}
 
 	titan.GiveOffhandWeapon( offhand_weaponry[0].weapon, 0, [] )
@@ -322,7 +308,7 @@ function GiveHotDropTitanWeaponsForPlayer( player, titan )
 		CreateTitanRocketPods( soul, titan )
 	}
 
-	if ( ordn == "mp_weapon_mega4" || spec == "mp_weapon_mega4" )
+	if ( ordn == "mp_weapon_mega4" || spec == "mp_weapon_mega4" || titan.GetModelName() == "models/titans/medium/titan_medium_ajax.mdl" )
 		CreateChargeCannon( soul, titan )
 	
 
@@ -333,7 +319,6 @@ function GiveTitanWeaponsForLoadoutData( titan, table )
 {
 	titan.GiveWeapon( table.primary, [] )
 	local offhands = table.offhandWeapons
-	local soul = titan.GetTitanSoul()
 
 	if ( table.secondary )
 		titan.GiveWeapon( table.secondary, [] )
@@ -357,25 +342,19 @@ function GiveTitanWeaponsForLoadoutData( titan, table )
 		//through the power of over-engineering: dual platform is achieved
 
 		//printl( table.passive2 )
-	local loop_max = MasterModdedTitans.len()
-	for( local E = 0; E < loop_max; E++ )
-	{
-		if( loop_max > 0 )
-		{
-			local t_a = MasterModdedTitans[ E ]
 
-			if( t_a.setfile == GetSoulPlayerSettings( soul ) )
-			{
-				if( t_a.offhand_override != null )
-				{
-					if( t_a.offhand_override.replaces_tactical == true )
-						offhand_weaponry[1].weapon = TryReplacementOverride( offhand_weaponry[1].weapon, offhand_weaponry[0].weapon, t_a.offhand_override )
-					else
-						offhand_weaponry[0].weapon = TryReplacementOverride( offhand_weaponry[1].weapon, offhand_weaponry[0].weapon, t_a.offhand_override )
-			
-				}
-			}
-		}
+	if( titan.GetModelName() == "models/titans/heavy/titan_heavy_ogre.mdl" )//if ( table.passive2 == 18 )//why was it called 18 by the table though?
+	{
+		offhand_weaponry[1].weapon = TryDualOffhandWeaponry( offhands[1].weapon, offhands[0].weapon, true )
+	}
+	if ( titan.GetModelName() == "models/titans/medium/titan_medium_ajax.mdl" )
+	{
+		offhand_weaponry[0].weapon = TryDualOffhandWeaponry( offhands[1].weapon, offhands[0].weapon, false )
+	}
+	
+	if ( titan.GetModelName() == "models/titans/light/titan_light_raptor.mdl" )//ok yes i know that a model search is bad... but i see no options here
+	{
+		offhand_weaponry[1].weapon = "mp_weapon_mega5" //afterall, thats the downside of BMT
 	}
 
 	titan.GiveOffhandWeapon( offhand_weaponry[0].weapon, 0, [] )
@@ -473,14 +452,6 @@ function SetDecalForTitan( player )
         if ( IsValid( titan ) )
             titan.SetSkin( skinIndex )
     }
-}
-
-function TryReplacementOverride( loadout_special, loadout_ordnance, weap_table )
-{
-	if( weap_table.specific_weapon_id != null )
-		return weap_table.specific_weapon_id
-	
-	return TryDualOffhandWeaponry( loadout_special, loadout_ordnance, weap_table.replaces_tactical )
 }
 
 function TryDualOffhandWeaponry( loadout_special, loadout_ordnance, replaces_tactical_instead )

@@ -11,22 +11,12 @@ PrecacheParticleSystem( EMP_CORE_EFFECT )
 
 is_hovering	<- false
 
-player <- self.GetWeaponOwner()
-
 primary_before_replace <- "mp_titanweapon_xo16"
 ordnance_before_replace <- "mp_titanweapon_salvo_rockets"
 special_before_replace <- "mp_titanweapon_vortex_shield"
 p_mods <- []
 o_mods <- []
 s_mods <- []
-
-function main()
-{
-	Globalize( TakePlayerWeapons )
-	Globalize( RegisterPreviousWeapons )
-	Globalize( ReplaceTitanWeapon )
-	Globalize( HoverTitanWizardry )
-}
 
 function OnWeaponPrimaryAttack( attackParams )
 {
@@ -96,7 +86,7 @@ function PlayerUsedTitanCore( player )
 			endPlayerFunc = EndDashCore
 			break
 		
-		/*case "missile_core":
+		case "missile_core":
 			passive = PAS_FUSION_CORE
 			startSoulFunc = StartMissileCore
 			endSoulFunc = EndMissileCore
@@ -130,34 +120,13 @@ function PlayerUsedTitanCore( player )
 			passive = PAS_FUSION_CORE
 			startSoulFunc = StartFlightCore
 			endSoulFunc = EndFlightCore
-			break*/
+			break
 		
 		default:
 			passive = PAS_FUSION_CORE
-			local loop_max = MasterModdedTitans.len()
-			for( local E = 0; E < loop_max; E++ )
-			{
-				if( loop_max > 0 )
-				{
-					local t_a = MasterModdedTitans[ E ]
-
-					if( t_a.setfile == GetSoulPlayerSettings( soul ) )
-					{
-						if( t_a.core_start != null && t_a.core_end != null )
-						{
-							startSoulFunc = t_a.core_start
-							endSoulFunc = t_a.core_end
-							printl("EEEEEEEEEEEEEEEEEEEE")
-							printl( startSoulFunc )
-							break
-						}
-					}
-				}
-			}
-			//startSoulFunc = StartDamageCore
-			//endSoulFunc = EndDamageCore
-			//printl("AAAAAAAAAAAAAAAAAA")
-			//break
+			startSoulFunc = StartDamageCore
+			endSoulFunc = EndDamageCore
+			break
 	}
 
 	SetCoreEffect( player, CreateChargeEffect )
@@ -293,9 +262,12 @@ function StartDashCore( player )
 function EndMissileCore( soul )
 {
 	local titan = soul.GetTitan()
+	local player = self.GetWeaponOwner()
 
-	TakePlayerWeapons( soul, "ordnance" )
-	TakePlayerWeapons( soul, "special" )
+	if ( titan.GetOffhandWeapon( 0 ) != null )
+		titan.TakeOffhandWeapon( 0 )
+	if ( titan.GetOffhandWeapon( 1 ) != null )
+		titan.TakeOffhandWeapon( 1 )
 
 	thread ReplaceTitanWeapon( titan, ordnance_before_replace, o_mods, "ordnance" )
 	thread ReplaceTitanWeapon( titan, special_before_replace, s_mods, "special" )
@@ -325,8 +297,10 @@ function StartMissileCore( soul )
 	//{
 		
 	//}
-	TakePlayerWeapons( soul, "ordnance" )
-	TakePlayerWeapons( soul, "special" )
+	if ( titan.GetOffhandWeapon( 0 ) != null )
+		titan.TakeOffhandWeapon( 0 )
+	if ( titan.GetOffhandWeapon( 1 ) != null )
+		titan.TakeOffhandWeapon( 1 )
 
 	thread ReplaceTitanWeapon( titan, ordnance_name, ["dev_mod_low_recharge"], "ordnance" )
 	thread ReplaceTitanWeapon( titan, special_name, ["dev_mod_low_recharge"], "special" )
@@ -336,7 +310,7 @@ function EndSmartCore( soul )
 {
 	local titan = soul.GetTitan()
 	local player = self.GetWeaponOwner()
-	local weapon = titan.GetActiveWeapon().GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 
 	if ( weapon != null )
 	{
@@ -350,7 +324,7 @@ function StartSmartCore( soul )//do i use minigun....do i use XO16? do i use... 
 	local titan = soul.GetTitan()
 	RegisterPreviousWeapons( titan )
 	local player = self.GetWeaponOwner()
-	local weapon = titan.GetActiveWeapon().GetWeaponClassName()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
 	if ( weapon != null )
 	{
 		titan.TakeWeapon( weapon )
@@ -361,7 +335,6 @@ function StartSmartCore( soul )//do i use minigun....do i use XO16? do i use... 
 	//shit, i got a calculating bitfield error, hol on. the _passives_shared doesnt include gun passives though..., not so smort now ;-;
 }
 
-/*
 function EndBulletStormCore( soul )
 {
 	local titan = soul.GetTitan()
@@ -387,14 +360,14 @@ function StartBulletStormCore( soul )//do i use minigun....do i use XO16? do i u
 	}
 	thread ReplaceTitanWeapon( titan, "mp_titanweapon_xo16", ["bullet_storm"], "primary" )
 }
-*/
 
 function EndPiercerCore( soul )
 {
 	local titan = soul.GetTitan()
 	local player = self.GetWeaponOwner()
 
-	TakePlayerWeapons( soul, "ordnance" )
+	if ( titan.GetOffhandWeapon( 0 ) != null )
+		titan.TakeOffhandWeapon( 0 )
 	
 	thread ReplaceTitanWeapon( titan, ordnance_before_replace, o_mods, "ordnance" )
 }
@@ -403,14 +376,21 @@ function StartPiercerCore( soul )//decided they should have their shields with i
 {
 	local titan = soul.GetTitan()
 	RegisterPreviousWeapons( titan )
-	TakePlayerWeapons( soul, "ordnance" )
+	if ( titan.GetOffhandWeapon( 0 ) != null )
+		titan.TakeOffhandWeapon( 0 )
 	thread ReplaceTitanWeapon( titan, "mp_weapon_mega4", ["piercer_core"], "ordnance" )
 }
 
 function EndAutoBurstCore( soul )
 {
 	local titan = soul.GetTitan()
-	TakePlayerWeapons( soul, "primary" )
+	local player = self.GetWeaponOwner()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
+
+	if ( weapon != null )
+	{
+		titan.TakeWeapon( weapon )
+	}
 	thread ReplaceTitanWeapon( titan, primary_before_replace, p_mods, "primary" )
 }
 
@@ -418,7 +398,12 @@ function StartAutoBurstCore( soul )//do i use minigun....do i use XO16? do i use
 {
 	local titan = soul.GetTitan()
 	RegisterPreviousWeapons( titan )
-	TakePlayerWeapons( soul, "primary" )
+	local player = self.GetWeaponOwner()
+	local weapon = player.GetActiveWeapon().GetWeaponClassName()
+	if ( weapon != null )
+	{
+		titan.TakeWeapon( weapon )
+	}
 	thread ReplaceTitanWeapon( titan, "mp_titanweapon_shotgun", ["auto_burst"], "primary" )
 }
 
@@ -426,9 +411,12 @@ function EndFlightCore( soul )
 {
 	is_hovering <- false
 	local titan = soul.GetTitan()
+	local player = self.GetWeaponOwner()
 	
-	TakePlayerWeapons( soul, "ordnance" )
-	TakePlayerWeapons( soul, "special" )
+	if ( titan.GetOffhandWeapon( 0 ) != null )
+		titan.TakeOffhandWeapon( 0 )
+	if ( titan.GetOffhandWeapon( 1 ) != null )
+		titan.TakeOffhandWeapon( 1 )
 
 	thread ReplaceTitanWeapon( titan, ordnance_before_replace, o_mods, "ordnance" )
 	thread ReplaceTitanWeapon( titan, special_before_replace, s_mods, "special" )
@@ -440,13 +428,15 @@ function StartFlightCore( soul )
 	RegisterPreviousWeapons( titan )
 	local player = self.GetWeaponOwner()
 	is_hovering <- true
-	thread HoverTitanWizardry( player, soul, 650 )// hmmm might be able to replace with titan
+	thread HoverTitanWizardry( player, soul, 650 )
 
 	local player_ordnance = "mp_titanweapon_salvo_rockets"
 	local player_tactical = "mp_titanweapon_shoulder_rockets"
 	
-	TakePlayerWeapons( soul, "ordnance" )
-	TakePlayerWeapons( soul, "special" )
+	if ( titan.GetOffhandWeapon( 0 ) != null )
+		titan.TakeOffhandWeapon( 0 )
+	if ( titan.GetOffhandWeapon( 1 ) != null )
+		titan.TakeOffhandWeapon( 1 )
 
 	thread ReplaceTitanWeapon( titan, player_ordnance, [ "mod_ordnance_core", "burn_mod_titan_salvo_rockets" ], "ordnance" )
 	thread ReplaceTitanWeapon( titan, player_tactical, [ "mod_ordnance_core", "burn_mod_titan_shoulder_rockets" ], "special" )
@@ -491,38 +481,6 @@ function RegisterPreviousWeapons( titan )
 	p_mods <- titan.GetActiveWeapon().GetMods()
 	o_mods <- titan.GetOffhandWeapon( 0 ).GetMods() //mods
 	s_mods <- titan.GetOffhandWeapon( 1 ).GetMods() //mods
-}
-
-function TakePlayerWeapons( soul, weapon_type )
-{
-	local titan = soul.GetTitan()
-	switch ( weapon_type )
-	{
-		case "primary":
-			local weapon = titan.GetActiveWeapon().GetWeaponClassName()
-
-			if ( weapon != null )
-			{
-				titan.TakeWeapon( weapon )
-			}
-			return
-		
-		case "ordnance":
-			local weapon = titan.GetOffhandWeapon( 0 )
-			if ( weapon != null )
-			{
-				titan.TakeWeapon( weapon )
-			}
-			return
-		
-		case "special":
-			local weapon = titan.GetOffhandWeapon( 1 )
-			if ( weapon != null )
-			{
-				titan.TakeWeapon( weapon )
-			}
-			return
-	}
 }
 
 function ReplaceTitanWeapon( titan, weapon, mods, slot_string )
@@ -750,4 +708,4 @@ function PushEverythingAway( titan )
 	}
 }
 
-main()
+

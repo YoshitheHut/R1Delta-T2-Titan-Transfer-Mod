@@ -2135,6 +2135,10 @@ function GetPropertyNameFromItemType( type )
 		case itemType.TITAN_PASSIVE2:
 			propertyName = "passive2"
 			break
+		
+		case itemType.TITAN_CORE:
+			propertyName = "core"
+			break
 
 		case itemType.TITAN_OS:
 			propertyName = "voiceChoice"
@@ -2214,6 +2218,8 @@ function GetLocalizedNameFromItemType( type )
 		case itemType.TITAN_PASSIVE2:
 			return "#ITEM_TYPE_TITAN_PASSIVE"
 		
+		case itemType.TITAN_CORE:
+			return "#ITEM_TYPE_TITAN_CORE"
 
 		case itemType.PILOT_PRIMARY_ATTACHMENT:
 			return "#ITEM_TYPE_WEAPON_ATTACHMENT"
@@ -2363,6 +2369,7 @@ function PopulateNewUnlockTables()
 	uiGlobal.newMeta[itemType.TITAN_DECAL] 					<- { parentRef = "edit_titans", newCount = 0, isNew = false, persArrayName = null }
 	uiGlobal.newMeta[itemType.TITAN_OS] 				    <- { parentRef = "edit_titans", newCount = 0, isNew = false, persArrayName = null }
 
+	uiGlobal.newMeta[itemType.TITAN_CORE] 				    <- { parentRef = "edit_titans", newCount = 0, isNew = false, persArrayName = null }
 
 	PopulateNewUnlockTable( uiGlobal.newMeta, "newLoadoutItems", "loadoutItems" )
 	PopulateNewUnlockTable( uiGlobal.newMeta, "newChassis", "titanSetFile" )
@@ -2371,6 +2378,7 @@ function PopulateNewUnlockTables()
 	PopulateNewUnlockTable( uiGlobal.newMeta, "newMods", "modsCombined" )
 	PopulateNewUnlockTable( uiGlobal.newMeta, "newTitanDecals", "titanDecals" )
 	PopulateNewUnlockTable( uiGlobal.newMeta, "newTitanOS", "titanOS" )
+	PopulateNewUnlockTable( uiGlobal.newMeta, "newTitanCore", "titanCore" )
 }
 
 function GetNewItemParentData( newItemData )
@@ -2469,18 +2477,6 @@ function HasAnyNewItem( refType, parentRef = null )
 {
 	if (!("newMeta" in uiGlobal))
 		return false
-
-	/*local loop_max = MasterModdedTitans.len()
-	for( local E = 0; E < loop_max; E++ )
-	{
-		if( loop_max > 0 )
-		{
-			local t_a = MasterModdedTitans[ E ]
-			
-			if( refType == t_a.setfile )
-				return false
-		}
-	}*/
 	return (uiGlobal.newMeta[refType].newCount > 0)
 }
 
@@ -2568,32 +2564,6 @@ Globalize( SetupButtonText )
 function ShowButtonDescription( button )
 {
 	SetElementsTextByClassname( uiGlobal.activeMenu, "MenuItemDescriptionClass", button.s.description )
-}
-
-function AddMenuEventHandler( menu, event, func )
-{
-	menu.s.scope <- this
-
-	if ( event == eUIEvent.MENU_OPEN )
-	{
-		Assert( menu.s.openFunc == null )
-		menu.s.openFunc <- func
-	}
-	else if ( event == eUIEvent.MENU_CLOSE )
-	{
-		Assert( menu.s.closeFunc == null )
-		menu.s.closeFunc <- func
-	}
-	else if ( event == eUIEvent.MENU_NAVIGATE_BACK )
-	{
-		Assert( menu.s.navBackFunc == null )
-		menu.s.navBackFunc <- func
-	}
-	else if ( event == eUIEvent.MENU_INPUT_MODE_CHANGED )
-	{
-		Assert( menu.s.inputModeChangedFunc == null )
-		menu.s.inputModeChangedFunc <- func
-	}
 }
 
 thread main()

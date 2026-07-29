@@ -2,10 +2,6 @@ const PERSISTENCE_INIT_VERSION = 22
 
 const RANDOMIZE_BOT_LOADOUT	= 1
 
-const BASE_TITAN_COUNT = 4 //Adds 3 for titans and 1 to make a valid array placement
-::MasterModdedTitans <- []
-::Titans_Enum_Placement <- 3
-
 const TESTCONST = 99
 const TEAM_ANY = -1
 const TEAM_INVALID = -1
@@ -62,8 +58,6 @@ const EXFILTRATION = "exfil"
 const TITAN_TAG = "tt"
 const SCAVENGER = "scv"
 const TITAN_ESCORT = "te"
-const VARIETY_PACK = "all"
-const DEADLY_GROUND = "lava"
 const DEVTEST = "devtest"
 const FFA = "ffa"
 const TITAN_BRAWL = "ttdm"
@@ -274,12 +268,19 @@ const CROW_HERO_MODEL = "models/vehicle/crow_dropship/crow_dropship_hero.mdl"
 
 //const BOMBER_MODEL = "models/vehicle/imc_bomber/bomber.mdl"
 //const BOMBER_BOMB_MODEL = "models/IMC_base/bomb_imc_01.mdl"
+
 const REDEYE_MODEL = "models/vehicle/redeye/redeye2.mdl"
 const ATLAS_MODEL = "models/titans/atlas/atlas_titan.mdl"
 const OGRE_MODEL = "models/titans/ogre/ogre_titan.mdl"
 const STRYDER_MODEL = "models/titans/stryder/stryder_titan.mdl"
-//const DESTROYER_MODEL = "models/titans/stryder/stryder_titan.mdl"
+const DESTROYER_MODEL = "models/titans/ogre/ogre_titan.mdl"
 
+const LEGION_MODEL = "models/titans/heavy/titan_heavy_deadbolt.mdl"
+const SCORCH_MODEL = "models/titans/heavy/titan_heavy_ogre.mdl"
+const ION_MODEL = "models/titans/medium/titan_medium_ajax.mdl"
+//const TONE_MODEL = "models/titans/medium/titan_medium_wraith.mdl"
+const NORTHSTAR_MODEL = "models/titans/light/titan_light_raptor.mdl"
+const RONIN_MODEL = "models/titans/light/titan_light_locust.mdl"
 
 const IMC_SPECTRE_MODEL = "models/Robots/spectre/imc_spectre.mdl"
 const MILITIA_SPECTRE_MODEL = "models/Robots/spectre/mcor_spectre_assault.mdl"
@@ -296,6 +297,7 @@ const TURRET_WEAPON_ROCKETS = "mp_turretweapon_rockets"
 const ROCKET_POD_MODEL_ATLAS_LEFT = "models/Weapons/titan_rocket_pod/titan_rocket_pod_atlas_L.mdl"
 const ROCKET_POD_MODEL_STRYDER_LEFT = "models/Titans/stryder/stryder_titan_l_rocket_pod.mdl"
 const ROCKET_POD_MODEL_OGRE_LEFT = "models/Titans/ogre/ogre_titan_L_rocket_pod.mdl"
+const ROCKET_POD_MODEL_DESTROYER_LEFT = "models/Titans/ogre/ogre_titan_L_rocket_pod.mdl"
 
 //------------------------
 // MAP STARS
@@ -687,6 +689,7 @@ const VORTEX_PAIN = 0 // vortex causes pain to rodeo'er
 const ATLAS_HATCH_PANEL = "models/titans/atlas/atlas_titan_hatch_panel.mdl"
 const STRYDER_HATCH_PANEL = "models/titans/stryder/stryder_titan_hatch_panel.mdl"
 const OGRE_HATCH_PANEL = "models/titans/ogre/ogre_titan_hatch_panel.mdl"
+const DESTROYER_HATCH_PANEL = "models/titans/ogre/ogre_titan_hatch_panel.mdl"
 
 const RODEO_APPROACH_FALLING_FROM_ABOVE = 0
 const RODEO_APPROACH_JUMP_ON = 1
@@ -1163,8 +1166,6 @@ const CE_FLAG_SONAR_ACTIVE			= 0x0100
 const CE_FLAG_WAVE_SPAWNING			= 0x0200
 const CE_FLAG_EOG_STAT_DISPLAY		= 0x0400
 
-const CE_FLAG_PERMANENT_HIDEHUD		= 0x0800
-
 const TITAN_DAMAGE_STAGE_FULL = 1.0
 const TITAN_DAMAGE_STAGE_1 = 0.75
 const TITAN_DAMAGE_STAGE_2 = 0.5
@@ -1281,7 +1282,8 @@ enum itemType
 	EVENT_PASSIVE,
 	RACE,
 	NOT_LOADOUT,
-	TITAN_DECAL
+	TITAN_DECAL,
+	TITAN_CORE
 }
 
 //server passives. Client has the var so it can create burn cards etc. but doesn't know which server passives the player has.
@@ -1620,8 +1622,7 @@ enum ePrivateMatchMaps
 	mp_zone_18,
 	mp_box,
 	mp_nest2,
-	mp_mia,
-	mp_npe
+	mp_mia
 }
 
 enum ePrivateMatchModes
@@ -1701,7 +1702,6 @@ enum eEventNotifications
 	YouWillBeAutobalanced,
 	MarkedForDeathMarkedAutobalanced,
 	AutoBalanceCooldown,
-	UplinkLocatingNextPanel,
 }
 
 enum ePrivateMatchStartState
@@ -1950,6 +1950,7 @@ const TAC_ABILITY_VORTEX 	= 1
 const TAC_ABILITY_WALL		= 2
 const TAC_ABILITY_SMOKE		= 3
 const TAC_ABILITY_RAILGUN	= 4
+const TAC_ABILITY_HOVER		= 5
 
 const SCOREBOARD_MATERIAL_COOP_TITAN 			= "HUD/coop/coop_titan"
 const SCOREBOARD_MATERIAL_COOP_EMP_TITAN		= "HUD/coop/coop_emp_titan_square"
@@ -2118,6 +2119,7 @@ enum eChallengeCategory
 	WEAPON_DMR,
 	WEAPON_SNIPER,
 	WEAPON_VALKYRIE,
+	WEAPON_TWINB,
 
 	PILOT_SECONDARY,	// Only used by challenges menu
 
@@ -2131,7 +2133,6 @@ enum eChallengeCategory
 	WEAPON_AUTOPISTOL,
 	WEAPON_SEMIPISTOL
 	WEAPON_WINGMAN,
-	WEAPON_TWINB,
 
 	PILOT_ORDNANCE,
 
@@ -2531,11 +2532,35 @@ const WEAPON_VALKYRIE_NAME = "mp_weapon_mega1"
 const WEAPON_TWINB_NAME = "mp_weapon_mega2"
 const WEAPON_THUNDERBOLT_NAME = "mp_weapon_mega3"
 const WEAPON_CHARGE_CANNON_NAME = "mp_weapon_mega4"
+const ABILITY_HOVER_NAME = "mp_weapon_mega5"
 
-enum eUIEvent
+/*enum Cores
 {
-	MENU_OPEN,
-	MENU_CLOSE,
-	MENU_NAVIGATE_BACK,
-	MENU_INPUT_MODE_CHANGED
+	CORE_DAMAGE = "core_damage",
+	CORE_DASH = "core_dash",
+	CORE_SHIELD = "core_defense"
+}*/
+/*
+enum CoreEntry
+{
+	Core1 = 1,
+	Core2 = 1,
+	Core3 = 2,
+	Core4 = 2,
+	Core5 = 2,
+	Core6 = 2,
+	Core7 = 2,
+	Core8 = 2,
+	Core9 = 2,
+	Core10 = 2,
+	Core11 = 2,
+	Core12 = 2,
+	Core13 = 3,
+	Core14 = 1,
+	Core15 = 1,
+	Core16 = 1,
+	Core17 = 1,
+	Core18 = 1,
+	Core19 = 1
 }
+*/

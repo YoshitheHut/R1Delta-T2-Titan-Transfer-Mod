@@ -183,6 +183,8 @@ function UpdateEditTitanLoadoutNewStatus()
 			button.SetNew( HasAnyNewItem( itemType.TITAN_PASSIVE1 ) )
 		else if ( buttonID == 5 )
 			button.SetNew( HasAnyNewItem( itemType.TITAN_PASSIVE2 ) )
+		else if ( buttonID == 8 )
+			button.SetNew( HasAnyNewItem( itemType.TITAN_CORE ) )
 	}
 
 	buttons = GetElementsByClassname( menu, "TitanDecalClass" )
@@ -238,6 +240,11 @@ function OnEditTitanSlotButton_Activate( button )
 		case 7:
 		    uiGlobal.itemTypeBeingEdited = itemType.TITAN_OS
 			OpenSubmenu( GetMenu( "TitanOSSelectMenu" ) )
+			break
+		
+		case 8:
+		    uiGlobal.itemTypeBeingEdited = itemType.TITAN_CORE
+			OpenSubmenu( GetMenu( "PassiveSelectMenu" ) )
 			break
 
 		default:

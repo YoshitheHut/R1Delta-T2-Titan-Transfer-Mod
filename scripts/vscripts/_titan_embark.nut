@@ -83,28 +83,28 @@ function main()
 		AddClientCommandCallback( "TitanNextMode", ClientCommand_TitanNextMode ) //
 	}
 	//::BlackMarketTitans <- {}
-	//IncludeFile( "Yoshi's_TitanCreator" )
-	//setUp( 1 )
+	IncludeFile( "Yoshi's_TitanCreator" )
+	setUp( 1 )
 
-	local loop_max = MasterModdedTitans.len()
+	local loop_max = TitanNames.len()
 	for( local E = 0; E < loop_max; E++ )
 	{
 		if( loop_max > 0 )
 		{
-			local t_a = MasterModdedTitans[ E ]
-			switch( t_a.titan_type )
+			local t_a = BlackMarketTitans[ TitanNames[ E ] ]
+			switch( t_a.type )
 			{
 				case "special_atlas":
-					AddEmbarkAnims( t_a.setfile, "atlas", t_a.embark_override )
-					AddEmbarkAudio( t_a.setfile, "atlas" )
+					AddEmbarkAnims( t_a.name, "atlas", t_a.emov )
+					AddEmbarkAudio( t_a.name, "atlas" )
 				
 				case "special_stryder":
-					AddEmbarkAnims( t_a.setfile, "stryder", t_a.embark_override )
-					AddEmbarkAudio( t_a.setfile, "stryder" )
+					AddEmbarkAnims( t_a.name, "stryder", t_a.emov )
+					AddEmbarkAudio( t_a.name, "stryder" )
 				
 				case "special_ogre":
-					AddEmbarkAnims( t_a.setfile, "ogre", t_a.embark_override )
-					AddEmbarkAudio( t_a.setfile, "ogre" )
+					AddEmbarkAnims( t_a.name, "ogre", t_a.emov )
+					AddEmbarkAudio( t_a.name, "ogre" )
 			}
 		}
 	}

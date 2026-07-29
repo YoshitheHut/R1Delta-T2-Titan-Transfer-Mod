@@ -16,16 +16,16 @@ function main()
 
 	level.audioAliases <- {}
 
-	//IncludeFile( "Yoshi's_TitanCreator" )
-	//setUp( 1 )
+	IncludeFile( "Yoshi's_TitanCreator" )
+	setUp( 1 )
 	
-	local loop_max = MasterModdedTitans.len()
+	local loop_max = TitanNames.len()
 	for( local E = 0; E < loop_max; E++ )
 	{
 		if( loop_max > 0 )
 		{
-			local t_a = MasterModdedTitans[ E ]
-			level.animMappings[ t_a.setfile ] <- t_a.embark_override
+			local t_a = BlackMarketTitans[ TitanNames[ E ] ]
+			level.animMappings[ t_a.name ] <- t_a.emov
 		}
 	}
 	

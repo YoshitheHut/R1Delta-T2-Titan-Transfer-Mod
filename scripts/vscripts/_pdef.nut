@@ -34,10 +34,7 @@ function InitPersistence()
     AddPersistenceKey("spawnAsTitan", "bool")
     AddPersistenceKey("haveSeenCustomCoop", "bool")
 
-	Globalize( add_setfile_persistance )
 
-	//IncludeFile( "Yoshi's_All-Stars" )
-	//IncludeFile("Yoshi's_TitanCreator")
 
     ::gameModes <- {
         tdm = 0
@@ -238,17 +235,15 @@ function InitPersistence()
 	    titan_atlas = 1
 	    titan_ogre = 2
 	    titan_stryder = 3
-		//titan_legion = 4
+		titan_legion = 4
+		titan_scorch = 5
+		titan_ion = 6
+		titan_tone = 7
+		titan_northstar = 8
+		titan_ronin = 9
     }
 
     AddPersistenceEnum("titanSetFile", titanSetFile)
-
-	IncludeFile( "Yoshi's_All-Stars" )
-	//IncludeFile("Yoshi's_TitanCreator")
-
-	//IncludeFile("Yoshi's_TitanCreator")
-
-	//setUp( 2 )
 
     ::titanMod <- {
         NULL = 0
@@ -468,6 +463,15 @@ function InitPersistence()
     }
 
     AddPersistenceEnum("titanOS", titanOS)
+//ignore this, it failed
+	::titanCore <- {
+        NULL = 0
+	    core_damage = 1
+		core_dash = 2
+		core_defense = 3
+    }
+
+    AddPersistenceEnum("titanCore", titanCore)
 
     AddPersistenceKey("pilotSpawnLoadout.isCustom", "bool")
     AddPersistenceKey("pilotSpawnLoadout.index", "int")
@@ -501,7 +505,7 @@ function InitPersistence()
     AddPersistenceKey("titanLoadouts.passive2", "titanPassive")
     AddPersistenceKey("titanLoadouts.decal", "titanDecals")
     AddPersistenceKey("titanLoadouts.voiceChoice", "titanOS")
-	
+	AddPersistenceKey("titanLoadouts.core", "titanCore")
 
 	//I hate loadout validation so much
 	//You can bypass ts with a single UI script but when I try to mod legitimately I'm screwed over
@@ -733,7 +737,8 @@ function InitPersistence()
     AddPersistenceArray("newTitanDecals", "titanDecals")
     AddPersistenceKey("newTitanDecals", "bool")
 
-	
+	AddPersistenceArray("newTitanCores", "titanCore")
+    AddPersistenceKey("newTitanCores", "bool")
 
     ::burnCard <- {
 	    NULL = 0,
@@ -2005,9 +2010,8 @@ function InitPersistence()
     AddPersistenceKey("playlistAnnouncementSeen", "bool")
 	AddPersistenceKey("delta.everythingUnlocked", "bool")
 
-	//AddPersistenceArray( "BlackMarketAutoRun", 15 )// Keep it short, the menu can't handle THAT much
-
 }
+InitPersistence()
 
 function IsDelta() {
     return !GetConVarBool("net_secure")
@@ -2198,11 +2202,3 @@ function testpdef() {
     for (local k = 0; k < PersistenceGetEnumCount("unlockRefs"); k++)
 		printt(k, PersistenceGetEnumItemNameForIndex("unlockRefs", k))
 }
-
-function add_setfile_persistance( file, placement )
-{
-	::titanSetFile[ file ] <- placement
-	printt(::titanSetFile)
-}
-
-InitPersistence()

@@ -504,22 +504,6 @@ function CoreReadyMessage( player )
 			AnnouncementMessage( player, "#HUD_CORE_ONLINE_STRYDER", "#HUD_CORE_ONLINE_STRYDER_HINT" )
 			break
 		
-		default:
-			local loop_max = MasterModdedTitans.len()
-			for( local E = 0; E < loop_max; E++ )
-			{
-				if( loop_max > 0 )
-				{
-					local t_a = MasterModdedTitans[ E ]
-
-					if( t_a.setfile == GetSoulPlayerSettings( soul ) )
-					{
-						AnnouncementMessage( player, t_a.hud_core_name, t_a.hud_core_hint )
-						break
-					}
-				}
-			}
-		/*
 		case "smart_core":
 			AnnouncementMessage( player, "Smart Core Online", "SMART XO-16 loaded and primed." )
 			break
@@ -542,7 +526,7 @@ function CoreReadyMessage( player )
 		
 		case "flight_core":
 			AnnouncementMessage( player, "Flight Core Online", "Flight boosters and navigational systems calibrated." )
-			break*/
+			break
 	}
 }
 

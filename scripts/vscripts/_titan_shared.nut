@@ -36,35 +36,31 @@ function main()
 	RegisterSignal( "TitanEjectionStarted" )
 	RegisterSignal( "EjectLand" )
 
-	//IncludeFile("Yoshi's_TitanCreator")
-	//setUp( 3 )
-
 	level.hatchModels <- {}
 	level.hatchModels[ ATLAS_MODEL ] <- ATLAS_HATCH_PANEL
 	level.hatchModels[ STRYDER_MODEL ] <- STRYDER_HATCH_PANEL
 	level.hatchModels[ OGRE_MODEL ] <- OGRE_HATCH_PANEL
-	//level.hatchModels[ DESTROYER_MODEL ] <- DESTROYER_HATCH_PANEL
+	level.hatchModels[ DESTROYER_MODEL ] <- DESTROYER_HATCH_PANEL
 
-	//level.hatchModels[ LEGION_MODEL ] <- STRYDER_HATCH_PANEL
+	level.hatchModels[ LEGION_MODEL ] <- STRYDER_HATCH_PANEL
+	level.hatchModels[ SCORCH_MODEL ] <- STRYDER_HATCH_PANEL
+	level.hatchModels[ ION_MODEL ] <- STRYDER_HATCH_PANEL
+	//level.hatchModels[ TONE_MODEL ] <- STRYDER_HATCH_PANEL
+	level.hatchModels[ NORTHSTAR_MODEL ] <- STRYDER_HATCH_PANEL
+	level.hatchModels[ RONIN_MODEL ] <- STRYDER_HATCH_PANEL
 
 	level.rodeoHitBoxNumber <- {}
 	level.rodeoHitBoxNumber[ ATLAS_MODEL ] <- 34
 	level.rodeoHitBoxNumber[ STRYDER_MODEL ] <- 50
 	level.rodeoHitBoxNumber[ OGRE_MODEL ] <- 41
-	//level.rodeoHitBoxNumber[ DESTROYER_MODEL ] <- 30
-
-	//level.rodeoHitBoxNumber[ LEGION_MODEL ] <- 53
-
-	local loop_max = MasterModdedTitans.len()
-	for( local E = 0; E < loop_max; E++ )
-	{
-		if( loop_max > 0 )
-		{
-			local bmt_model = MasterModdedTitans[ E ]
-			level.hatchModels[ bmt_model.titan_model ] <- bmt_model.hatch_model
-			level.rodeoHitBoxNumber[ bmt_model.titan_model ] <- bmt_model.rodeo_hitbox_number
-		}
-	}
+	level.rodeoHitBoxNumber[ DESTROYER_MODEL ] <- 30
+//what does this do
+	level.rodeoHitBoxNumber[ LEGION_MODEL ] <- 53
+	level.rodeoHitBoxNumber[ SCORCH_MODEL ] <- 53
+	level.rodeoHitBoxNumber[ ION_MODEL ] <- 53
+	//level.rodeoHitBoxNumber[ TONE_MODEL ] <- 36
+	level.rodeoHitBoxNumber[ NORTHSTAR_MODEL ] <- 53
+	level.rodeoHitBoxNumber[ RONIN_MODEL ] <- 53
 
 	Globalize( CodeCallback_PlayerInTitanCockpit )
 
@@ -142,7 +138,7 @@ function main()
 		PrecacheModel( ROCKET_POD_MODEL_ATLAS_LEFT )
 		PrecacheModel( ROCKET_POD_MODEL_OGRE_LEFT )
 		PrecacheModel( ROCKET_POD_MODEL_STRYDER_LEFT )
-		//PrecacheModel( ROCKET_POD_MODEL_DESTROYER_LEFT )
+		PrecacheModel( ROCKET_POD_MODEL_DESTROYER_LEFT )
 		PrecacheModel( "models/industrial/bolt_tiny01.mdl" )
 
 		PrecacheModel( SHOULDER_CHARGE_CANNON_MODEL )

@@ -25,8 +25,8 @@ function InitLoadouts()
 		uiGlobal.eventHandlersAdded <- true
 	}
 
-	//IncludeFile( "Yoshi's_TitanCreator" )
-	//setUp( 1 )
+	IncludeFile( "Yoshi's_TitanCreator" )
+	setUp( 1 )
 
 	uiGlobal.loadoutBeingEdited <- null
 	uiGlobal.loadoutTypeBeingEdited <- null
@@ -1371,20 +1371,16 @@ function UpdateLockElements( menu, button, page, ref, childRef = null )
 				lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_STRYDER", unlockLevels[ "titan_stryder"] )
 			else if ( ref == "titan_ogre" )
 				lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_OGRE", unlockLevels[ "titan_ogre"] )
-			else if( MasterModdedTitans.len() > 0 )
-			{
-				local loop_max = MasterModdedTitans.len()
-				for( local E = 0; E < loop_max; E++ )
-				{
-					if( loop_max > 0 )
-					{
-						local t_a = MasterModdedTitans[ E ]
-						
-						if ( ref == t_a.setfile )
-							lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_OGRE", unlockLevels[ t_a.setfile ] )
-					}
-				}
-			}
+			else if ( ref == "titan_scorch" )
+				lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_OGRE", unlockLevels[ "titan_scorch"] )
+			else if ( ref == "titan_ronin" )
+				lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_OGRE", unlockLevels[ "titan_ronin"] )
+			else if ( ref == "titan_northstar" )
+				lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_OGRE", unlockLevels[ "titan_northstar"] )
+			else if ( ref == "titan_legion" )
+				lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_OGRE", unlockLevels[ "titan_legion"] )
+			else if ( ref == "titan_ion" )
+				lockedLabel.SetText( "#CHASSIS_LOCKED_TEXT_OGRE", unlockLevels[ "titan_ion"] )
 			else
 				Assert( 0, "Unhandled setfile unlock case" )
 			lockedLabel.Show()

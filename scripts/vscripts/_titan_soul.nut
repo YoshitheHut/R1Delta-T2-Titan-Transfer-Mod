@@ -32,8 +32,8 @@ function main()
 	Globalize( AddTitanMapping )
 
 	//::BlackMarketTitans <- {}
-	//IncludeFile( "Yoshi's_TitanCreator" )
-	//setUp( 1 )
+	IncludeFile( "Yoshi's_TitanCreator" )
+	setUp( 1 )
 
 	RegisterSignal( "OnSoulTransfer" )
 	RegisterSignal( "OnTitanDeath" )
@@ -53,7 +53,7 @@ function main()
 	level.titanPlayerSettingsMapping <- {}
 	level.titanTypeMapping <- {}
 
-	//printl( BlackMarketTitans )
+	printl( BlackMarketTitans )
 
 	// need to put play settings onto the npc titans
 	AddTitanMapping( "titan_atlas", "atlas" )
@@ -66,13 +66,13 @@ function main()
 	
 	//AddTitanMapping( "titan_ion", "special_atlas" )
 
-	local loop_max = MasterModdedTitans.len()
+	local loop_max = TitanNames.len()
 	for( local E = 0; E < loop_max; E++ )
 	{
 		if( loop_max > 0 )
 		{
-			local t_a = MasterModdedTitans[ E ]
-			AddTitanMapping( t_a.setfile, t_a.titan_type )
+			local t_a = BlackMarketTitans[ TitanNames[ E ] ]
+			AddTitanMapping( t_a.name, t_a.type )
 		}
 	}
 }
